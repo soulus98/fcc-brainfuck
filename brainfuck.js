@@ -11,17 +11,17 @@ document.addEventListener("DOMContentLoaded", function start(){
 })
 
 
-function animFunc(sp){
+function anim(sp){
   value = 72;
   step = 1;
   animPointer.innerHTML = "i_ptr:   v";
   outputString = "output: ";
   animOutput = document.getElementById("anim-output");
   animValue.innerHTML = "value:  [72][0][0]...]";
-  setInterval(animFunc1, sp);
+  setInterval(animFunc, sp);
 }
 
-function animFunc1(){
+function animFunc(){
   if(value>0){
     if(step==1){
       animPointer.innerHTML = "i_ptr:    v";
