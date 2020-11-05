@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<Title>
+			BrainF*ck Documentation
+		</Title>
+		<link rel="stylesheet" href="brainfuck.css" />
+		<script type="text/javascript" src="brainfuck.js"></script>
+	</head>
+	<body>
+		<script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+		<nav id="navbar">
+		  <div id="anim-header">
+			<header style="font-size:25px;color:rgba(0,0,0,0);">
+			  BrainF &nbsp;k Documentation
+			</header>
+		  </div>
+		  <a class="nav-link" href="#What_Is_Brainf*ck?">
+			What Is Brainf*ck?
+		  </a>
+		  <a class="nav-link" href="#Why_Would_I_Want_To_Learn_Such_A_Stupid_Language?" style="font-size:14.5px;text-indent:0px;">
+			Why Would I Want To Learn Such A Stupid Language?
+		  </a>
+		  <a class="nav-link" href="#Moving_And_Editing">
+			Moving And Editing
+		  </a>
+		  <a class="nav-link" href="#Input_And_Output">
+			Input And Output
+		  </a>
+		  <a class="nav-link" href="#Looping">
+			Looping
+		  </a>
+		  <a class="nav-link" href="#Conclusion">
+			Conclusion
+		  </a>
+		  <a class="nav-link" href="#Reference">
+			Reference
+		  </a>
+		</nav>
+		<main id="main-doc">
+		  <section class="main-section" id="What_Is_Brainf*ck?">
+			<header>
+			  What Is Brainf*ck?
+			</header>
+			<p>
+			  Brainf*ck is close to being the simplest programming language possible, with only 8 instructions:
+			  <br />
+			  <code> &gt; &lt; + - , . [ ]</code>
+			  <br />
+			  These instructions move an internal data pointer, increment and decrement the value at the data pointer, input and output data, and provide simple looping.
+			  <br />
+			  As an aside: brainf*ck was written with the intent of having a language with the smallest-possible compiler. Many compilers for brainf*ck are smaller than 200 bytes! See Wikipedia for more details.
+			</p>
+		  </section>
+		  <section class="main-section" id="Why_Would_I_Want_To_Learn_Such_A_Stupid_Language?">
+			<header>
+			  Why Would I Want To Learn Such A Stupid Language?
+			</header>
+			<p>
+			  It’s been suggested that you should learn at least 6 programming languages to be a good programmer. The more programming languages you know, the more perspectives you’ll have on problems.<br /> 
+			  Brainf*ck is such a simple language to learn, there’s almost no reason not to learn it. If you read the whole of this page now, and try out all the code samples in the interpreter, in half-an-hour to an hour you’ll have a new programming language under your belt. Tell me that’s a waste of time :)
+			</p>
+			<p>
+		Another good reason to learn brainf*ck is to understand how basic a Turing-complete programming language can be. A common argument when programmers compare languages is “well they’re all Turing-complete”, meaning that anything you can do in one language you can do in another. Once you’ve learnt brainf*ck, you’ll understand just how difficult it can be to use a Turing-complete language, and how that argument holds no water.  
+			</p>
+		  </section>
+		  <section class="main-section" id="Moving_And_Editing">
+			<header>
+			  Moving And Editing
+			</header>
+			<p>
+			  Brainf*ck doesn’t have variable names – just one long array of cells, each of which contains a number; Each cell is initialized to zero; and a data pointer starts off pointing to the first cell:
+			  <code>
+			  <pre>
+pointer: v  
+address: 0  1  2  3  4  5  6  ...
+value:  [0][0][0][0][0][0][0][...]
+			  </pre>
+			  </code>
+			</p>
+			<p>
+			  A brainf*ck program is a stream of the 8 commands (other characters are allowed in this stream but are ignored). Here’s a basic brainf*ck program:<br />
+			  <code>
+				&gt;&gt;&gt;&gt;++ 
+			  </code>
+			</p>
+			<p>
+			  The greater-than command moves the data pointer one cell to the right. <br />
+			  The plus command increases the value of the cell under the data pointer by 1. <br />
+			  Here’s what the data looks like after we run the above program:<br />
+			  <code>
+				<pre>
+pointer:             v
+address: 0  1  2  3  4  5  6  ...
+value:  [0][0][0][0][2][0][0][...]
+				</pre>
+			  </code>
+			</p>
+			<p>
+			  The data pointer moved four cells to the right, and the value of that cell was increased by 2. Pretty simple.<br />
+			  You can probably guess what the less-than and minus commands do:<br />
+			  <br />
+			  <code>
+			  program: &gt;&gt;&gt;&gt;++&lt;&lt;++-<br />
+				<pre>
+pointer:       v
+address: 0  1  2  3  4  5  6  ...
+value:  [0][0][1][0][2][0][0][...]
+				</pre>
+			  </code>
+			</p>
+			<p>  
+		So, move four cells right, increment twice, move two cells left, increment twice and decrement once.<br />
+		Well done, you’ve already learnt half of the syntax of brainf*ck.
+			</p>
+		  </section>
+		  <section class="main-section" id="Input_And_Output">
+			<header>
+			  Input And Output
+			</header>
+			<p>
+			  A programming language isn’t much use without the ability to input and output data.<br /> 
+			  Brainf*ck has two commands for I/O – , (comma) and . (full-stop/period).<br /> 
+			  The comma inputs a character from the input into the current cell, and the period outputs the character in the current cell.<br /> 
+			  The ASCII code of the character is used on input and output.<br /> 
+			  You may not be used to interchanging characters and integers, so it’s worth having a look at a chart to see how they map.
+			</p>
+			<p>
+			  Here’s a simple program that inputs a character, increments it once, then outputs it:
+			  <code>
+				<pre>
+program: ,+.
+input:   a
+
+pointer:  v     
+address:  0  1  2  3  4  5  6  ...
+value:  [98][0][0][0][0][0][0][...]
+				</pre>
+			  </code>
+			  The program takes a character from the input, in this case the letter ‘a’, and puts it into the first data cell. It then increments it, and outputs the value of the cell.<br />
+			  A lowercase ‘a’ has the ASCII code 97, and ‘b’ has the ASCII code 98.<br />
+			  Every time you use the comma command you remove a character from the input stream:
+			  <code>
+				<pre>
+program: ,&gt;,&gt;,.&lt;.&lt;.
+input:   abc
+
+pointer:  v     
+address:  0   1   2  3  4  5  6  ...
+value:  [97][98][99][0][0][0][0][...]
+				</pre>
+			  </code>
+		This program puts the first character of input in the first cell, the second character in the second cell and the third character in the third cell (although it looks like an evil dragon smiley).
+			</p>
+		  </section>
+		  <section class="main-section" id="Looping">
+			<header>
+			  Looping
+			</header>
+			<p>
+			  Ok, that’s three-quarters of the language covered now. All that’s left is looping. <br />
+			  This is a bit trickier, but fairly simple once you’ve got the hang of it.<br />
+			  <br />
+			  [ and ] (left and right brackets) are used for looping.<br /> 
+			  Anything in between pairs of brackets will loop (you can have nested loops – the pairs match like parentheses (i.e. this is the equivalent of an inner loop) and this is the outer loop (did you see what I did there? (inner inner!))).<br /> 
+			  Of course there’s no point looping forever, so brainf*ck needs a way of knowing when to stop.<br />
+			  It does this by checking the value of the current data cell to see if it is zero. If it is, execution will skip to after the end of the loop.<br />
+		To illustrate this I’m going to need to show the position of the current instruction. This is called the instruction pointer, or i_ptr in the figure below.
+			</p>
+			<button onclick="animFunc(100)">
+			  Play animation
+			</button>
+			<button onclick="animFunc(650)">
+			  Play slowly
+			</button>
+			<code>
+			  <pre id="anim-pointer">
+i_ptr:   vbroken
+			  </pre>
+			  <pre>
+program: ,[.-]
+input:   H
+
+pointer:  v    
+address:  0  1  2 ...
+		</pre>
+			  <pre id="anim-value">
+value:  [72][0][0]...]broken
+			  </pre>
+			  <pre id="anim-output">
+output: This text should not appear unless the JS is not working
+			  </pre>
+			</code>
+		  </section>
+		  <section class="main-section" id="Conclusion">
+			<header>
+			  Conclusion
+			</header>
+			<p>
+			And that’s the entire language. Here’s a quick recap:
+			  <ul>
+				<li>
+				  &gt; Move the data pointer one cell to the right
+				</li>
+				<li>
+				  &lt; Move the data pointer one cell to the left
+				</li>
+				<li>
+				  + Increment the value of the cell at the data pointer
+				</li>
+				<li>
+		- Decrement the value of the cell at the data pointer
+				  </li>
+				<li>
+		, Take a character from the input and place its value into the current data cell
+				  </li>
+				<li>
+		. Output the value of the current data cell as a character
+				  </li>
+				<li>
+		[ If the current data cell is zero, skip to after the closing bracket, otherwise continue
+				  </li>
+				<li>
+		] Skip back to the matching opening bracket (a common optimization is to skip over this instruction if the current cell is zero, rather than going back to the opening bracket and checking)
+				  </li>
+			</ul>
+		The end<br />
+			  <br />
+		If you’ve read this whole page and tried out all the code, you now know brainf*ck.<br /> 
+			  Well done, that’s another item for your CV!<br /> 
+			  If you try making anything relatively complex you’ll realise the true value of the abstractions we build software on.<br /> 
+			  All languages have different levels of abstraction, and you should be working at the highest level you can afford.<br /> 
+			  It’s worth dropping down to the level of brainf*ck occasionally so you can really appreciate the abstractions you’re given.
+			</p>
+		  </section>
+		  <section class="main-section" id="Reference">
+			<header>
+			  Reference
+			</header>
+			<p>
+			   All information on this page was taken from <a href="https://github.com/narayanprusty/BrainFuck-Interpreter">
+				https://github.com/narayanprusty/BrainFuck-Interpreter  
+			  </a>
+			</p>  
+		  </section>
+		</main>
+	</body>
+</html>
